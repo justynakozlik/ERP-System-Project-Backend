@@ -1,6 +1,7 @@
 package org.example.backend.entity;
 
 import lombok.Data;
+import org.example.backend.dto.EmployeeDto;
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEmployee;
 
     @Column
@@ -23,5 +24,13 @@ public class Employee {
 
     @OneToOne(mappedBy = "employee")
     private Operator operator;
+
+    public static Employee of(EmployeeDto dto){
+        Employee employee = new Employee();
+        employee.setFirstName(dto.getFirstName());
+        employee.setLastName(dto.getLastName());
+        employee.setSalary(dto.getSalary());
+        return employee;
+    }
 
 }

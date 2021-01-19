@@ -3,7 +3,6 @@ package org.example.backend.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
@@ -23,11 +22,7 @@ public class Item {
     @JoinColumn(name = "idQuantityType")
     private QuantityType quantityType;
 
-    @ManyToMany
-    @JoinTable(
-            name = "item_warehouse",
-            joinColumns = @JoinColumn(name = "idItem"),
-            inverseJoinColumns = @JoinColumn(name = "idWarehouse")
-    )
-    private Set<Warehouse> warehouses;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idWarehouse")
+    private Warehouse warehouse;
 }

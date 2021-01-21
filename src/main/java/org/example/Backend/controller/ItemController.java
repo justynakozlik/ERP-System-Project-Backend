@@ -1,8 +1,10 @@
 package org.example.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.EmployeeDto;
 import org.example.backend.dto.ItemDto;
 import org.example.backend.dto.ItemSavedDto;
+import org.example.backend.entity.Employee;
 import org.example.backend.entity.Item;
 import org.example.backend.repository.ItemRepository;
 import org.example.backend.service.ItemService;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,6 +33,13 @@ public class ItemController {
                 .stream()
                 .map(ItemDto::of)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/items/{idItem}")
+    public ItemDto getItem(@PathVariable Long idItem) throws InterruptedException {
+        Thread.sleep(500);
+        Optional<Item> optionalItem = itemRepository.findById(idItem);
+        return ItemDto.of(optionalItem.get());
     }
 
     @DeleteMapping("/items")

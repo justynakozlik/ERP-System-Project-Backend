@@ -1,11 +1,9 @@
 package org.example.backend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.backend.dto.EmployeeDto;
 import org.example.backend.dto.ItemDto;
 import org.example.backend.dto.ItemEditViewDto;
 import org.example.backend.dto.ItemSavedDto;
-import org.example.backend.entity.Employee;
 import org.example.backend.entity.Item;
 import org.example.backend.repository.ItemRepository;
 import org.example.backend.repository.QuantityTypeRepository;
@@ -60,8 +58,8 @@ public class ItemController {
         return dto;
     }
 
-    @DeleteMapping("/items")
-    public ResponseEntity deleteItem(@RequestBody Long idItem) {
+    @DeleteMapping("/items/{idItem}")
+    public ResponseEntity deleteItem(@PathVariable Long idItem) {
         itemRepository.deleteById(idItem);
         return ResponseEntity.ok().build();
     }

@@ -25,7 +25,7 @@ class EmployeeTest {
     @Test
     public void givenUpdateEmployeeMethodWhenUseEmployeeDtoThenDataHasBeenChanged(){
         Employee employee = new Employee();
-        employee.setFirstName("Kasia");
+        employee.setFirstName("Ola");
         employee.updateEmployee(dto);
         Assertions.assertEquals(employee.getFirstName(), dto.getFirstName());
     }
